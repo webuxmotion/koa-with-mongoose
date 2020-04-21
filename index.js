@@ -1,3 +1,4 @@
+import router from './routes.js';
 const Koa = require('koa');
 const { ApolloServer, gql } = require('apollo-server-koa');
 
@@ -40,6 +41,9 @@ const resolvers = {
 const server = new ApolloServer({ typeDefs, resolvers });
 
 const app = new Koa();
+
+app.use(router.routes());
+
 server.applyMiddleware({ app });
 // alternatively you can get a composed middleware from the apollo server
 // app.use(server.getMiddleware());
